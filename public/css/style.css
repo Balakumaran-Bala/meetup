@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #map {
     width: 100%;
     height: 100vh;
@@ -14,4 +15,36 @@
     position: absolute;
     z-index: 1;
     width: 100%;
+=======
+body {
+  margin: 0;
+}
+
+.ui-container {
+}
+
+.search-container {
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+}
+
+.map-search-input {
+  width: 80vw;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 2vh;
+  display: block;
+}
+
+.map-search-input:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+#map {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+>>>>>>> client
 }
