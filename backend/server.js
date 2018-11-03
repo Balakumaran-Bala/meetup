@@ -29,13 +29,15 @@ var getDistanceInTime = function(socketId) {
     }, function(err, response, body) {
         if(err) { console.log(err); return; }
         var res = JSON.parse(body);
+        console.log(res.rows[0].elements[0].duration.value);
         return res.rows[0].elements[0].duration.value;
       });
 }
 
 io.on('connection', function (socket) {
-    socket.on('joinLobby', function() {
+    socket.on('joinLobby', function(data) {
         lobby.users[socket.id] = {
+            name: data.name,
             currentLocation: {
                 
             },
@@ -60,7 +62,8 @@ io.on('connection', function (socket) {
     socket.on('departed', function() { //calculate everyones time to leave
         var maxTime = 0;
         Object.keys(lobby.users).forEach(function(socketId) {
-            var time = getDistanceInTime(socketId);
+            var time = await getDistanceInTime(socketId);
+            console.log(time);
             if (time > maxTime) {
                 maxTime = time;
             }
@@ -68,6 +71,7 @@ io.on('connection', function (socket) {
         });
         Object.keys(lobby.users).forEach(function(socketId) {
             lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
+            //console.log(lobby.users[socketId].ttl);
         })
     });
 

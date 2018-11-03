@@ -2,13 +2,28 @@
 <html>
     <body>
         <script src="/socket.io/socket.io.js"></script>
-        <script>
+
+        <script> //House2 approx 18 min away
             var socket = io.connect('http://localhost:8080');
-            //const socket = io('http://localhost:8080');
-            socket.emit('joinLobby');
-            socket.emit('updateLocation', {'x': 32.910826, 'y': -96.965412});
-            socket.emit('setDestination', {'x': 30.1745996, 'y': -97.8879667});
-            socket.emit('departed');
+            socket.emit('joinLobby', {'name': 'Keane'});
+            socket.emit('updateLocation', {'x': 29.6439318, 'y': -95.5102511});
         </script>
-    </body>
+        <script> //SugarLand approx 20 min away
+            var socket = io.connect('http://localhost:8080');
+            socket.emit('joinLobby', {'name': 'Bala'});
+            socket.emit('updateLocation', {'x': 29.6196787, 'y': -95.63494630000002});
+        </script>
+         <script> //UofH approx 26 min away
+            var socket = io.connect('http://localhost:8080');
+            socket.emit('joinLobby', {'name': 'Andy'});
+            socket.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
+        </script>
+         <script> //House 3 approx 35 min away
+            var socket = io.connect('http://localhost:8080');
+            socket.emit('joinLobby', {'name': 'Tony'});
+            socket.emit('updateLocation', {'x': 29.6393083, 'y': -95.26521969999999});
+            socket.emit('setDestination', {'x': 29.7853358, 'y': -95.49261059999998}); //destination is Patagonia Grill and Cafe
+            socket.emit('departed');
+        </script> 
+        </body>
 </html>
