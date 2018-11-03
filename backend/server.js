@@ -15,59 +15,59 @@ var lobby = {
     users: {}
 };
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(express.static(path.join(__dirname, '/../')))
+app.use(express.static(path.join(__dirname, '../public')));
+
 
 var getDistanceInTime = function(socketId) {
     request({url:'https://maps.googleapis.com/maps/api/distancematrix/json', 
         qs: {
-            units: imperial,
-            origins: lobby.users.socketId.currentLocation.x+ ', ' + lobby.users.socketId.currentLocation.y,
+            units: 'imperial',
+            origins: lobby.users[socketId].currentLocation.x+ ', ' + lobby.users[socketId].currentLocation.y,
             destinations: lobby.destination.x + ', ' + lobby.destination.y,
-            key: "AIzaSyDdwJ5vgTKaqsvTezIFrrUQBoGfv9-N9PQ"
+            key: 'AIzaSyDdwJ5vgTKaqsvTezIFrrUQBoGfv9-N9PQ'
         }
     }, function(err, response, body) {
         if(err) { console.log(err); return; }
-        console.log("Get response: " + response.statusCode);
+        var res = JSON.parse(body);
+        return res.rows[0].elements[0].duration.value;
       });
 }
 
 io.on('connection', function (socket) {
-    socket.on('joinLobby', function(data) {
-        lobby[users][socket.id] = {
+    socket.on('joinLobby', function() {
+        lobby.users[socket.id] = {
             currentLocation: {
                 
             },
             eta: "-1", //estimated time of arrival
             ttl: "-1", //time to leave
         };
-        socket.emit('joinedLobby');
+        //socket.emit('joinedLobby');
     });
 
     socket.on('setDestination', function(data) {
-       lobby[destination][x] = data[x];
-       lobby[destination][y] = data[y];
+       lobby.destination.x = data.x;
+       lobby.destination.y = data.y;
        socket.emit('destinationSet');
     });
 
     socket.on('updateLocation', function(data) {
-        lobby[users][socket.id][currentLocation][x] = data[x];
-        lobby[users][socket.id][currentLocation][y] = data[y];
-        socket.emit('updatedLocation');
+        lobby.users[socket.id].currentLocation.x = data.x;
+        lobby.users[socket.id].currentLocation.y = data.y;
+        //socket.emit('updatedLocation');
     });
 
-    socket.on('departed', function(data) { //calculate everyones time to leave
+    socket.on('departed', function() { //calculate everyones time to leave
         var maxTime = 0;
-        Object.keys(lobby[users]).forEach(function(socketId) {
+        Object.keys(lobby.users).forEach(function(socketId) {
             var time = getDistanceInTime(socketId);
             if (time > maxTime) {
                 maxTime = time;
             }
-            lobby[users][socketId][ttl] = time;
+            lobby.users[socketId].ttl = time;
         });
-        Object.keys(lobby[users]).forEach(function(socketId) {
-            lobby[users][socketId][ttl] = maxTime - lobby[users][socketId][ttl];
+        Object.keys(lobby.users).forEach(function(socketId) {
+            lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
         })
     });
 

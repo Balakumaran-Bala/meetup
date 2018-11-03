@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://localhost:8080');
+            //const socket = io('http://localhost:8080');
+            socket.emit('joinLobby');
+            socket.emit('updateLocation', {'x': 32.910826, 'y': -96.965412});
+            socket.emit('setDestination', {'x': 30.1745996, 'y': -97.8879667});
+            socket.emit('departed');
+        </script>
+    </body>
+</html>
