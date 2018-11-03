@@ -1,10 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var request = require('request');
+var qs = require('querystring');
 
 var lobby = {
     destination: {
@@ -18,8 +19,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, '/../')))
 
-io.on('connection', function (socket) {
+var getDistanceInTime = function(socketId) {
+    request({url:'https://maps.googleapis.com/maps/api/distancematrix/json', 
+        qs: {
+            units: imperial,
+            origins: lobby.users.socketId.currentLocation.x+ ', ' + lobby.users.socketId.currentLocation.y,
+            destinations: lobby.destination.x + ', ' + lobby.destination.y,
+            key: "AIzaSyDdwJ5vgTKaqsvTezIFrrUQBoGfv9-N9PQ"
+        }
+    }, function(err, response, body) {
+        if(err) { console.log(err); return; }
+        console.log("Get response: " + response.statusCode);
+      });
+}
 
+io.on('connection', function (socket) {
     socket.on('joinLobby', function(data) {
         lobby[users][socket.id] = {
             currentLocation: {
@@ -46,7 +60,7 @@ io.on('connection', function (socket) {
     socket.on('departed', function(data) { //calculate everyones time to leave
         var maxTime = 0;
         Object.keys(lobby[users]).forEach(function(socketId) {
-            var time = GoogleMapsApi(lobby[users][socketId][currentLocation][x], lobby[users][socket][currentLocation][y]);
+            var time = getDistanceInTime(socketId);
             if (time > maxTime) {
                 maxTime = time;
             }
