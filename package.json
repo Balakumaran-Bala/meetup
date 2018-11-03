@@ -1,0 +1,19 @@
+{
+  "name": "meetup",
+  "version": "1.0.0",
+  "description": "Meetup at any place at any time",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Balakumaran-Bala/meetup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Balakumaran-Bala/meetup/issues"
+  },
+  "homepage": "https://github.com/Balakumaran-Bala/meetup#readme"
+}
