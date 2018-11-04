@@ -101,13 +101,14 @@ body {
 }
 
 #details-view {
-  top: 80vh;
+  top: 73vh;
   text-align: center;
 }
 
 #gandalf {
   max-height: 200px;
 }
+
 #details-time-title {
   margin: 10px;
 }
