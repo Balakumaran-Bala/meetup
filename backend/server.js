@@ -19,19 +19,20 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 var getDistanceInTime = function(socketId) {
-    request({url:'https://maps.googleapis.com/maps/api/distancematrix/json', 
-        qs: {
-            units: 'imperial',
-            origins: lobby.users[socketId].currentLocation.x+ ', ' + lobby.users[socketId].currentLocation.y,
-            destinations: lobby.destination.x + ', ' + lobby.destination.y,
-            key: 'AIzaSyDdwJ5vgTKaqsvTezIFrrUQBoGfv9-N9PQ'
-        }
-    }, function(err, response, body) {
-        if(err) { console.log(err); return; }
-        var res = JSON.parse(body);
-        console.log(res.rows[0].elements[0].duration.value);
-        return res.rows[0].elements[0].duration.value;
-      });
+    return new Promise(function(resolve, reject) {
+        request({url:'https://maps.googleapis.com/maps/api/distancematrix/json', 
+            qs: {
+                units: 'imperial',
+                origins: lobby.users[socketId].currentLocation.x+ ', ' + lobby.users[socketId].currentLocation.y,
+                destinations: lobby.destination.x + ', ' + lobby.destination.y,
+                key: 'AIzaSyDdwJ5vgTKaqsvTezIFrrUQBoGfv9-N9PQ'
+            }
+        }, function(err, response, body) {
+            if(err) { console.log(err); return; }
+            var res = JSON.parse(body);
+            resolve(res.rows[0].elements[0].duration.value);
+          });
+    });
 }
 
 io.on('connection', function (socket) {
@@ -62,17 +63,18 @@ io.on('connection', function (socket) {
     socket.on('departed', function() { //calculate everyones time to leave
         var maxTime = 0;
         Object.keys(lobby.users).forEach(function(socketId) {
-            var time = await getDistanceInTime(socketId);
-            console.log(time);
-            if (time > maxTime) {
-                maxTime = time;
-            }
-            lobby.users[socketId].ttl = time;
+            getDistanceInTime(socketId).then(res => {
+                console.log(res);
+                if (res > maxTime) {
+                    maxTime = res;
+                }
+                lobby.users[socketId].ttl = res;
+            });
+
+            Object.keys(lobby.users).forEach(function(socketId) {
+                lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
+            })
         });
-        Object.keys(lobby.users).forEach(function(socketId) {
-            lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
-            //console.log(lobby.users[socketId].ttl);
-        })
     });
 
     socket.on('disconnect', function(){
