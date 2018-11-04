@@ -17,7 +17,7 @@ $("#mod-next").on('click', function() {
 
 $("#mod-back").on('click', function() {
     $("#mode-prompt").hide();
-
+    $("#name-prompt").show();
 });
 
 let dist = null;
