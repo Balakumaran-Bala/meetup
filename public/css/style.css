@@ -1,0 +1,113 @@
+
+body {
+  margin: 0;
+}
+
+.page-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.ui-container {
+  text-align: center;
+}
+
+.center-container {
+  margin: 0 auto;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  z-index: 1;
+  width: 100%;
+  top: 0px;
+}
+
+.map-search-input {
+  max-width: 300px;
+  margin: auto;
+  margin-top: 2vh;
+  display: block;
+}
+
+.map-search-input:focus {
+  box-shadow: 4px 5px 5px;
+}
+
+.shadow {
+  box-shadow: 4px 5px 5px black;
+}
+
+.shadow-less-blur {
+  box-shadow: 4px 5px 2px black;
+}
+
+.next-btn {
+  color: black;
+  border-color: green;
+  background-color: greenyellow;
+  box-shadow: 4px 5px 2px green;
+}
+
+.back-btn {
+  color: black;
+  border-color: red;
+  background-color: rgb(255, 151, 151);
+  box-shadow: 4px 5px 2px red;
+  float: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.spacer-top {
+  margin-top: 20px;
+}
+
+.prompt {
+  margin-top: 75px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.transport-btn {
+  height: 70px;
+  width: 70px;
+  border-color: black;
+}
+
+#map {
+  position: absolute !important;
+  height: 100vh;
+  width: 100vw;
+  top: 0px;
+}
+
+#name-prompt {
+  display: none;
+}
+
+#mode-prompt {
+  display: none;
+}
+
+#details-view {
+  top: 80vh;
+  text-align: center;
+}
+
+#gandalf {
+  max-height: 200px;
+}
+#details-time-title {
+  margin: 10px;
+}

@@ -18,6 +18,10 @@
   "homepage": "https://github.com/Balakumaran-Bala/meetup#readme",
   "dependencies": {
     "express": "^4.16.4",
+<<<<<<< HEAD
+=======
+    "request": "^2.88.0",
+>>>>>>> d01c773068586686c4229608d1adc40e088262be
     "socket.io": "^2.1.1"
   }
 }
