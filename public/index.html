@@ -1,20 +1,107 @@
-<!DOCTYPE HTML>
-<html>
-    <body>
-        <script src="/socket.io/socket.io.js"></script>
-        <script> 
-            var socket1 = io.connect('http://localhost:8080');
-            socket1.emit('setDestination', {'x': 29.7853358, 'y': -95.49261059999998}); //destination is Patagonia Grill and Cafe
 
-            // UofH
-            socket1.emit('joinLobby', {'name': 'Keane'});
-            socket1.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Meetup</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="ui-container">
+      <div id="map"></div>
+      <div class="center-container">
+        <div class="search-container">
+          <p class="control has-icons-right">
+            <input type="text" class="shadow input map-search-input" id="search-input" placeholder="Where to?">
+            <span class="icon is-small is-right">
+              <i style="color: black; margin-top: 30px;" class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
 
-            // //UofH approx 26 min away
-            var socket2 = io.connect('http://localhost:8080');
-            socket2.emit('joinLobby', {'name': 'Andy'});
-            socket2.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
-        </script> 
-        <script src="scripts/bot.js"></script>
-    </body>
+
+        <div id="name-prompt" class="shadow card prompt">
+          <div class="card-header">
+            <span class="card-header-title">Attend an event</span>
+          </div>
+          <div class="card-content">
+            <img id="gandalf" src="img/chibi__gandalf_by_ijen_ekusas-d5sqn6c.png" alt="Gandalf">
+            <p class="text-left">Hi, I'm Gandalf! Did you know that wizards are never late? Through this web app, I will bestow upon you this power!</p>
+            <div class="content spacer-top">
+              <p class="title is-4 text-left">Your name:</p>
+              <input type="text" class="input" placeholder="e.g. Frodo">
+              <p class="text-left spacer-top">This is the display name other members of your party will see.</p>
+              <div class="text-right">            
+                <button class="shadow button next-btn">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mode-prompt" class="shadow card prompt">
+          <div class="card-header">
+            <span class="card-header-title">Attend an event</span>
+          </div>
+          <div class="card-content">
+            <div id="address-line"></div>
+            <img id="gandalf" src="img/partywizard.gif" alt="Gandalf">
+            <div class="content spacer-top">
+              <p class="title is-4 text-left">Mode of transportation:</p>
+              <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
+                <i class="fas fa-walking"></i>
+              </button>
+              <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
+                <i class="fas fa-bicycle"></i>
+              </button>
+              <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
+                <i class="fas fa-car"></i>
+              </button>
+              <div class="text-right spacer-top">
+                <button id="mod-back" class="shadow button back-btn">Back</button>
+                <button id="mod-next" class="shadow button next-btn">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="details-view" class="shadow card prompt">
+          <div class="card-content">
+            <p>Time to leave:</p>
+            <h1 style="font-size: 4em" class="title">4:01</h1>
+            <div id="details-content" class="content spacer-top"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="scripts/index.js"></script>
+  <script src="scripts/UI.js"></script>
+  <script src="scripts/bot.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv8qdJHCRpdVPEF9HxDd3mVG5qk2D1y7E&libraries=places&callback=init">
+  </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script> 
+      var socket1 = io.connect('http://localhost:8080');
+      socket1.emit('setDestination', {'x': 29.7853358, 'y': -95.49261059999998}); //destination is Patagonia Grill and Cafe
+
+        // UofH
+      socket1.emit('joinLobby', {'name': 'Keane'});
+      socket1.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
+
+        // //UofH approx 26 min away
+      var socket2 = io.connect('http://localhost:8080');
+      socket2.emit('joinLobby', {'name': 'Andy'});
+      socket2.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
+    </script> 
+</body>
 </html>
