@@ -82,12 +82,16 @@ socket2.on('eta', function(data) {
     $("#timer").text(timeToLeave);
     deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
-        
-
-        dropMarker(new google.maps.Marker({
+        var new_marker = new google.maps.Marker({
             map: map, 
             position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
-        })); //placeholfer
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10
+            },
+        });
+        user_markers.push(new_marker);
+        dropMarker(new_marker); //placeholfer
     });
 });
 
