@@ -16,6 +16,9 @@ var lobby = {
     users: {}
 };
 
+var socket1;
+var socket2;
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 readline.emitKeypressEvents(process.stdin);
@@ -48,10 +51,11 @@ var getDistanceInTime = function(socketId) {
 var setTTL = function(maxTime) {
     Object.keys(lobby.users).forEach(function(socketId) {
         lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
-        console.log(lobby.users[socketId].name + ": " + lobby.users[socketId].ttl);
+        //console.log(lobby.users[socketId].name + ": " + lobby.users[socketId].ttl);
     });
+    io.emit('displayTTL', lobby.users);
 }
-
+  
 var depart = function() {
     var maxTime = 0;
     var count = 0;
@@ -70,7 +74,6 @@ var depart = function() {
 }
 
 io.on('connection', function (socket) {
-
     socket.on('joinLobby', function(data) {
         lobby.users[socket.id] = {
             name: data.name,
@@ -80,6 +83,8 @@ io.on('connection', function (socket) {
             eta: "-1", //estimated time of arrival
             ttl: "-1", //time to leave
         };
+        //console.log(data.name);
+        //socket.emit('displayTTL', {'hello': 'world'});
     });
 
     socket.on('setDestination', function(data) {
@@ -93,8 +98,8 @@ io.on('connection', function (socket) {
         lobby.users[socket.id].currentLocation.y = data.y;
         getDistanceInTime(socket.id).then(res => {
             lobby.users[socket.id].eta = res;
-            //socket.emit('updatedLocation', {'users': lobby.users});
         });
+        io.emit('eta', lobby.users);
     });
 
     socket.on('departed', function() { //calculate everyones time to leave
