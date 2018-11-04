@@ -35,7 +35,7 @@ function clickToMarkers(_markers) {
                 map.panTo(event.latLng);
                 document.getElementById("search-input").value = _marker.address;
                 setMarkerData(_marker.address, _marker.title);
-                DisplayModal(_NAME, _ADDRESS);
+                DisplayHostModal(_NAME, _ADDRESS);
 
             });
         }

@@ -96,9 +96,16 @@ body {
 }
 
 #details-view {
-  top: calc(100vh - 210px);
+  top: 80vh;
+  text-align: center;
 }
 
 #gandalf {
   max-height: 200px;
+}
+#details-time-title {
+  margin: 10px;
+}
+#details-view {
+  border-radius: 10px;
 }

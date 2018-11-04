@@ -44,40 +44,62 @@
         </div>
         <div id="mode-prompt" class="shadow card prompt">
           <div class="card-header">
-            <span class="card-header-title">Attend an event</span>
+            <span class="card-header-title">aaa</span>
           </div>
           <div class="card-content">
             <div id="address-line"></div>
             <img id="gandalf" src="img/partywizard.gif" alt="Gandalf">
-            <div class="content spacer-top">
-              <p class="title is-4 text-left">Mode of transportation:</p>
-              <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
-                <i class="fas fa-walking"></i>
-              </button>
-              <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
-                <i class="fas fa-bicycle"></i>
-              </button>
-              <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
-                <i class="fas fa-car"></i>
-              </button>
+
+
+            <!--input form-->
+              <form action="">
+                <div class="name-input">
+                <input type="text" class="input" placeholder="Your name , eg. Frodo">
+                <div class="content spacer-top">
+                <p class="title is-4 text-left">Transportation:</p>
+                <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
+                  <i class="fas fa-walking"></i>
+                </button>
+                <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
+                  <i class="fas fa-bicycle"></i>
+                </button>
+                <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
+                  <i class="fas fa-car"></i>
+                </button>
+              </form>
               <div class="text-right spacer-top">
                 <button id="mod-back" class="shadow button back-btn">Back</button>
                 <button id="mod-next" class="shadow button next-btn">Next</button>
               </div>
+
+
             </div>
           </div>
         </div>
-        <div id="details-view" class="shadow card prompt">
-          <div class="card-content">
-            <p>Time to leave:</p>
-            <h1 style="font-size: 4em" class="title">4:01</h1>
-            <div id="details-content" class="content spacer-top"></div>
-          </div>
-        </div>
+        
+
+
       </div>
     </div>
   </div>
   
+
+
+        <!--info card-->
+        <div id="details-view" class="shadow card prompt">
+          <div class="card-content">
+              <i class="fas fa-angle-up"></i>
+              <div id="details-title"><p>More Info </p></div>
+            <h3 style="font-size: 4em" class="title">4:01</h3>
+            <div id="details-content" class="content spacer-top">
+              <h3>Users in lobby: </h3>
+              <div class="user-list">
+                user1
+              </div>
+            </div>
+          </div>
+        </div>
+
 
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
