@@ -1,4 +1,6 @@
 // //House 3 approx 35 min away
+var count1 = 0;
+var count2 = 0;
 var socket3 = io.connect('http://localhost:8080');
 socket3.emit('joinLobby', {'name': 'Tony'});
 var tLoc = [29.530390, -95.347364];
@@ -11,7 +13,10 @@ var moveTony = function() {
     tLoc[0] += xChange;
     tLoc[1] += yChange;
     //if (tLoc[0] != destination.x && tLoc[1] != destination.y) {
-        setTimeout(moveTony, 1000);
+        if (count1 < 60) {
+            count1++;
+            setTimeout(moveTony, 1000);
+        }
     //}
 }
 socket3.on('displayTTL', function(data) {
@@ -32,7 +37,11 @@ var moveBala = function() {
     bLoc[0] += xChange2;
     bLoc[1] += yChange2;
     //if (bLoc[0] != destination.x && bLoc[1] != destination.y) {
-        setTimeout(moveBala, 1000);
+        if (count2 < 60) {
+            count2++;
+            setTimeout(moveBala, 1000);
+        }
+        
     //}      
 }
 socket4.on('eta', function(data) {
@@ -40,7 +49,7 @@ socket4.on('eta', function(data) {
         if (data[key].name == 'Bala') {
             eta = data[key].eta;
         }
-        if(data[key].name == 'Tony' && data[key].eta != -1 && data[key].eta <= eta && notSet) {
+        if(data[key].name == 'Tony' && data[key].eta != -1 && data[key].eta <= 200 + eta && notSet) {
             moveBala();
             notSet = false;
         }

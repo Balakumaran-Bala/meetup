@@ -71,14 +71,21 @@ function coordinateToAddr(_geocoder, _map, _latLng, _markers) {
     });
 } 
 
-var timeToLeave = 0;
+var ttl = -1;
 socket2.on('eta', function(data) {
     Object.keys(data).forEach(function(key) {
-        if (data[key].name == "Keane" && timeToLeave == 0 && data[key].ttl != -1) {
-            timeToLeave = parseInt(data[key].ttl / 60) + ":" + (data[key].ttl % 60 >= 10 ? data[key].ttl % 60 : "0" + data[key].ttl % 60);
-            console.log(timeToLeave);
+        if (data[key].name == "Keane" && ttl == -1 && data[key].ttl != -1) {
+            ttl = data[key].ttl;
+            //timeToLeave = parseInt(data[key].ttl / 60) + ":" + (data[key].ttl % 60 >= 10 ? data[key].ttl % 60 : "0" + data[key].ttl % 60);
         }
     });
+    if (ttl >= 20) {
+        ttl -= 555 / 120;
+        ttl = Math.max(parseInt(ttl), 0);
+    } else {
+        ttl = 0;
+    }
+    var timeToLeave = parseInt(ttl / 60) + "m " + (ttl % 60 >= 10 ? ttl % 60 : "0" + ttl % 60) + "s";
     $("#timer").text(timeToLeave);
     deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
