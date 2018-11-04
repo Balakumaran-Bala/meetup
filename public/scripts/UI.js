@@ -11,6 +11,7 @@ $("#name-next").on('click', function() {
 
 $("#mod-next").on('click', function() {
     $("#mode-prompt").hide();
+    $("#link-display").show();
     socket2.emit('setDisplayMarker');
     socket2.emit('getUsers');
 });
@@ -19,6 +20,16 @@ $("#mod-back").on('click', function() {
     $("#mode-prompt").hide();
     $("#name-prompt").show();
 });
+
+$("#link-display-back").on('click', function () {
+    $("#link-display").hide();
+    $("#mode-prompt").show();
+})
+
+$("#link-display-next").on('click', function () {
+    $("#link-display").hide();
+    $("#details-view").show();
+})
 
 let dist = null;
 
