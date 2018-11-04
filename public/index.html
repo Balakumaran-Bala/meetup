@@ -3,17 +3,17 @@
     <body>
         <script src="/socket.io/socket.io.js"></script>
         <script> 
-            //House2 approx 18 min away
+            //UofH approx 18 min away
             var socket = io.connect('http://localhost:8080');
             socket.emit('setDestination', {'x': 29.7853358, 'y': -95.49261059999998}); //destination is Patagonia Grill and Cafe
 
             socket.emit('joinLobby', {'name': 'Keane'});
-            socket.emit('updateLocation', {'x': 29.6439318, 'y': -95.5102511});
+            socket.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
 
-            // //SugarLand approx 20 min away
+            // //House1 approx 43 min away
             var socket2 = io.connect('http://localhost:8080');
             socket2.emit('joinLobby', {'name': 'Bala'});
-            socket2.emit('updateLocation', {'x': 29.6196787, 'y': -95.63494630000002});
+            socket2.emit('updateLocation', {'x': 29.5161656, 'y': -95.28864920000001});
 
             // //UofH approx 26 min away
             var socket3 = io.connect('http://localhost:8080');
