@@ -70,11 +70,23 @@ body {
   box-shadow: 4px 5px 5px black;
 }
 
+.shadow-less-blur {
+  box-shadow: 4px 5px 2px black;
+}
+
 .next-btn {
   color: black;
   border-color: green;
   background-color: greenyellow;
   box-shadow: 4px 5px 2px green;
+}
+
+.back-btn {
+  color: black;
+  border-color: red;
+  background-color: rgb(255, 151, 151);
+  box-shadow: 4px 5px 2px red;
+  float: left;
 }
 
 .text-left {
@@ -89,6 +101,12 @@ body {
   margin-top: 20px;
 }
 
+.prompt {
+  margin-top: 75px;
+  border-radius: 4px;
+  width: 100%;
+}
+
 #map {
   position: absolute !important;
   height: 100vh;
@@ -97,11 +115,11 @@ body {
 }
 
 #name-prompt {
-  z-index: 400;
-  margin-top: 75px;
-  border-radius: 4px;
-  width: 100%;
+  display: none;
+}
 
+#mode-prompt {
+  display: none;
 }
 
 #gandalf {
