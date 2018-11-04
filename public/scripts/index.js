@@ -5,6 +5,8 @@ var _USR_LOC = "";
 var _COORDINATES = "";
 var markers = [];
 var user_markers = [];
+var destination_marker;
+deleteMarkers(user_markers);
 var marker_selected = false;
 
 /****CUSTOM MAP RELATED FUNCTIONS*****/
@@ -82,13 +84,26 @@ socket2.on('eta', function(data) {
     $("#timer").text(timeToLeave);
     deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
+        
+
         var new_marker = new google.maps.Marker({
+            name: data[key].name,
             map: map, 
             position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
             icon: {
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 10
             },
+        });
+        var infowindow =  new google.maps.InfoWindow({
+            content: new_marker.name,
+            position: new_marker.position
+        });
+        new_marker.addListener('mouseover', function() {
+            infowindow.open(map, this);
+        });
+        new_marker.addListener('mouseout', function() {
+            infowindow.close();
         });
         user_markers.push(new_marker);
         dropMarker(new_marker); //placeholfer
@@ -98,8 +113,10 @@ socket2.on('eta', function(data) {
 var clientIsHost = true;
 
 socket2.on('userLocation', function(data) {
+    deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
         var new_marker = new google.maps.Marker({
+            name: data[key].name,
             map: map, 
             position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
             icon: {
@@ -107,6 +124,17 @@ socket2.on('userLocation', function(data) {
                 scale: 10
             },
         });
+        var infowindow =  new google.maps.InfoWindow({
+            content: new_marker.name,
+            position: new_marker.position
+        });
+        new_marker.addListener('mouseover', function() {
+            infowindow.open(map, this);
+        });
+        new_marker.addListener('mouseout', function() {
+            infowindow.close();
+        });
+        user_markers.push(new_marker);
         user_markers.push(new_marker);
         dropMarker(new_marker); //placeholfer
     });
