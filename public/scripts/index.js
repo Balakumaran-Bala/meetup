@@ -1,7 +1,8 @@
 // globals.
-var NAME = "";
-var ADDRESS = "";
-var USR_LOC = "";
+var _NAME = "";
+var _ADDRESS = "";
+var _USR_LOC = "";
+var _COORDINATES = "";
 var markers = [];
 var marker_selected = false;
 
@@ -23,8 +24,8 @@ function deleteMarkers(_markers) {
 }
 // sets name and address of location marked by the marker.
 function setMarkerData(address, name) {
-    ADDRESS = address;
-    NAME = name;
+    _ADDRESS = address;
+    _NAME = name;
 }
 // give all current markers a click listener.
 function clickToMarkers(_markers) {
@@ -34,7 +35,7 @@ function clickToMarkers(_markers) {
                 map.panTo(event.latLng);
                 document.getElementById("search-input").value = _marker.address;
                 setMarkerData(_marker.address, _marker.title);
-                displayModal(NAME, ADDRESS);
+                DisplayModal(NAME, ADDRESS);
 
             });
         }
@@ -56,8 +57,8 @@ function coordinateToAddr(_geocoder, _map, _latLng, _markers) {
                 // deploy marker on map.
                 dropMarker(marker);
                 document.getElementById("search-input").value = marker.address;
-                ADDRESS = marker.address;
-                NAME = marker.name;
+                _ADDRESS = marker.address;
+                _NAME = marker.name;
                 clickToMarkers(_markers);
 
                 return;
@@ -226,6 +227,7 @@ function init() {
         // this function takes care of generating the marker and 
         // applying click events.
         coordinateToAddr(geocoder, map, event.latLng, markers);
+        _COORDINATES = event.latLng;
     })
 
     // LISTENER EVENT WHEN YOU SEARCH A NEW PLACE.
@@ -258,6 +260,7 @@ function init() {
                 position: place.geometry.location, 
                 zoom: 0,
             }));
+            _COORDINATES = place.geometry.location;
             if (place.geometry.viewport) {
                 bounds.union(place.geometry.viewport);
             } else {
