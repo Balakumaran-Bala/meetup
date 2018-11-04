@@ -200,6 +200,16 @@ function init() {
             map.setCenter(pos);
             USR_LOC = pos;
             console.log(pos);
+            // set user marker. 
+            var usr_marker = new google.maps.Marker({
+                position: pos,
+                map: map,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 10
+                  },
+                title: 'user location'
+            });
         });
     }
 
