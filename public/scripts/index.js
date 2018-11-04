@@ -80,10 +80,125 @@ function init() {
         disableDefaultUI: true,
         gestureHandling: 'greedy',
         clickableIcons: false,
+        styles: [
+            {
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#FFA800"
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#f8fae9"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#679714"
+                    },
+                    {
+                        "saturation": 33.4
+                    },
+                    {
+                        "lightness": -25.4
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#53FF00"
+                    },
+                    {
+                        "saturation": -73
+                    },
+                    {
+                        "lightness": 40
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#FBFF00"
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#00FFFD"
+                    },
+                    {
+                        "lightness": 30
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#00BFFF"
+                    },
+                    {
+                        "saturation": 6
+                    },
+                    {
+                        "lightness": 8
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            }
+        ]
     });
     var geocoder = new google.maps.Geocoder;
     var input = document.getElementById('search-input');
     var searchBox = new google.maps.places.SearchBox(input);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+            console.log(pos);
+        });
+    }
 
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
