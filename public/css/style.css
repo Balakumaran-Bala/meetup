@@ -79,6 +79,12 @@ body {
   width: 100%;
 }
 
+.transport-btn {
+  height: 70px;
+  width: 70px;
+  border-color: black;
+}
+
 #map {
   position: absolute !important;
   height: 100vh;
