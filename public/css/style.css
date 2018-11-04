@@ -119,7 +119,7 @@ body {
 }
 
 #mode-prompt {
-  display: none;
+  display: block;
 }
 
 #gandalf {

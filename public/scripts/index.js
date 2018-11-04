@@ -3,9 +3,7 @@ var ADDRESS = "";
 var markers = [];
 
 
-
-
-/****CUSTOM FUNCTIONS*****/
+/****CUSTOM MAP RELATED FUNCTIONS*****/
 // deploys a marker object.
 function dropMarker(_marker) {
     markers.push(_marker);
