@@ -98,6 +98,7 @@ io.on('connection', function (socket) {
         lobby.users[socket.id].currentLocation.y = data.y;
         getDistanceInTime(socket.id).then(res => {
             lobby.users[socket.id].eta = res;
+            console.log(res, lobby.users[socket.id].name);
         });
         io.emit('eta', lobby.users);
     });
