@@ -12,7 +12,7 @@ function dropMarker(_marker) {
     markers.push(_marker);
 
     //document.getElementById("search-input").value = _marker.address;
-    map.panTo(_marker.position);
+    //map.panTo(_marker.position);
 }
 // takes an array of marker objects and sets them to null on the map.
 function deleteMarkers(_markers) {
@@ -78,7 +78,16 @@ socket2.on('eta', function(data) {
             console.log(timeToLeave);
         }
     });
+    $("#timer").text(timeToLeave);
+    Object.keys(data).forEach(function(key) {
+        dropMarker(new google.maps.Marker({
+            map: map, 
+            position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
+        })); //placeholfer
+    });
 });
+
+let clientIsHost = true;
 
 socket2.on('userLocation', function(data) {
     Object.keys(data).forEach(function(key) {
@@ -87,6 +96,7 @@ socket2.on('userLocation', function(data) {
             position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
         })); //placeholfer
     });
+    clientIsHost = false;
 })
 
 socket2.emit('getUsers');

@@ -32,7 +32,7 @@ var moveBala = function() {
     bLoc[0] += xChange2;
     bLoc[1] += yChange2;
     //if (bLoc[0] != destination.x && bLoc[1] != destination.y) {
-        setTimeout(moveBala, 500);
+        setTimeout(moveBala, 1000);
     //}      
 }
 socket4.on('eta', function(data) {

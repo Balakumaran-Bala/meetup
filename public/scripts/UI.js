@@ -1,5 +1,9 @@
 var view_toggle = true;
 
+if (!clientIsHost) {
+    $("#name-prompt").show();
+}
+
 function DisplayHostModal(name, address) {
     $("#name-prompt").show();
 }
