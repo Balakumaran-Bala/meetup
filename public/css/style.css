@@ -101,6 +101,7 @@ body {
 }
 
 #details-view {
+  display: none;
   top: 70vh;
   text-align: center;
 }
