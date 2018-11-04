@@ -45,20 +45,27 @@ var getDistanceInTime = function(socketId) {
     });
 }
 
+var setTTL = function(maxTime) {
+    Object.keys(lobby.users).forEach(function(socketId) {
+        lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
+        console.log(lobby.users[socketId].name + ": " + lobby.users[socketId].ttl);
+    });
+}
+
 var depart = function() {
     var maxTime = 0;
+    var count = 0;
     Object.keys(lobby.users).forEach(function(socketId) {
         getDistanceInTime(socketId).then(res => {
-            console.log(res);
             if (res > maxTime) {
                 maxTime = res;
             }
             lobby.users[socketId].ttl = res;
+            count++;
+            if (count == Object.keys(lobby.users).length) {
+                setTTL(maxTime);
+            }
         });
-    });
-
-    Object.keys(lobby.users).forEach(function(socketId) {
-        lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
     });
 }
 
@@ -84,10 +91,10 @@ io.on('connection', function (socket) {
     socket.on('updateLocation', function(data) {
         lobby.users[socket.id].currentLocation.x = data.x;
         lobby.users[socket.id].currentLocation.y = data.y;
-        // getDistanceInTime(socket.id).then(res => {
-        //     lobby.users[socket.id].eta = res;
-        //     //socket.emit('updatedLocation', {'users': lobby.users});
-        // });
+        getDistanceInTime(socket.id).then(res => {
+            lobby.users[socket.id].eta = res;
+            //socket.emit('updatedLocation', {'users': lobby.users});
+        });
     });
 
     socket.on('departed', function() { //calculate everyones time to leave
