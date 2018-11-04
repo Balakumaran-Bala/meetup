@@ -35,7 +35,7 @@ function clickToMarkers(_markers) {
                 map.panTo(event.latLng);
                 document.getElementById("search-input").value = _marker.address;
                 setMarkerData(_marker.address, _marker.title);
-                DisplayModal(NAME, ADDRESS);
+                DisplayModal(_NAME, _ADDRESS);
 
             });
         }
@@ -67,10 +67,29 @@ function coordinateToAddr(_geocoder, _map, _latLng, _markers) {
             window.alert('geocoder failed due to ' + status);
             return;
         }
-
     });
-
 } 
+
+var timeToLeave = 0;
+socket2.on('eta', function(data) {
+    Object.keys(data).forEach(function(key) {
+        if (data[key].name == "Keane" && timeToLeave == 0 && data[key].ttl != -1) {
+            timeToLeave = parseInt(data[key].ttl / 60) + ":" + (data[key].ttl % 60 >= 10 ? data[key].ttl % 60 : "0" + data[key].ttl % 60);
+            console.log(timeToLeave);
+        }
+    });
+});
+
+socket2.on('userLocation', function(data) {
+    Object.keys(data).forEach(function(key) {
+        dropMarker(new google.maps.Marker({
+            map: map, 
+            position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
+        })); //placeholfer
+    });
+})
+
+socket2.emit('getUsers');
 
 
 //*****BUILD GOOGLE MAP****//

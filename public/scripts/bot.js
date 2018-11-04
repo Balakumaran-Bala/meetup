@@ -7,7 +7,6 @@ var destination = {'x': 29.728101, 'y': -95.338509};
 var xChange = (destination.x-tLoc[0])/60.0;
 var yChange = (destination.y-tLoc[1])/60.0;
 var moveTony = function() {
-    console.log('move');
     socket3.emit('updateLocation', {'x': tLoc[0], 'y': tLoc[1]});
     tLoc[0] += xChange;
     tLoc[1] += yChange;

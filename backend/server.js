@@ -16,8 +16,7 @@ var lobby = {
     users: {}
 };
 
-var socket1;
-var socket2;
+var displayMarker = false;
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -103,8 +102,20 @@ io.on('connection', function (socket) {
                 lobby.users[socket.id].eta = res;
             console.log(lobby.users[socket.id].eta, lobby.users[socket.id].name);
         });
-        io.emit('eta', lobby.users);
+        if (displayMarker)
+            io.emit('eta', lobby.users);
     });
+
+    socket.on('getUsers', function(data) {
+        console.log(displayMarker);
+        if (displayMarker) {
+            socket.emit('userLocation', lobby.users);
+        }
+    })
+
+    socket.on('setDisplayMarker', function(data) {
+        displayMarker = true;
+    }) 
 
     socket.on('departed', function() { //calculate everyones time to leave
         depart();

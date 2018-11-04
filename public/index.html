@@ -83,14 +83,12 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  <script src="scripts/index.js"></script>
-  <script src="scripts/UI.js"></script>
-  <script src="scripts/bot.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv8qdJHCRpdVPEF9HxDd3mVG5qk2D1y7E&libraries=places&callback=init">
   </script>
   <script src="/socket.io/socket.io.js"></script>
   <script> 
+
       var socket1 = io.connect('http://localhost:8080');
       socket1.emit('setDestination', {'x': 29.7853358, 'y': -95.49261059999998}); //destination is Patagonia Grill and Cafe
 
@@ -103,5 +101,8 @@
       socket2.emit('joinLobby', {'name': 'Andy'});
       socket2.emit('updateLocation', {'x': 29.7207902, 'y': -95.3440627149137});
     </script> 
+    <script src="scripts/bot.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/UI.js"></script>
 </body>
 </html>
