@@ -9,9 +9,6 @@ body {
   position: absolute;
 
 }
-.search {
-    box-shadow: 0px 5px 15px;
-}
 
 .map-search-input {
   width: 80vw;
@@ -19,6 +16,7 @@ body {
   margin: auto;
   margin-top: 2vh;
   display: block;
+  box-shadow: 0px 5px 5px;
 }
 
 .map-search-input:focus {
@@ -26,8 +24,27 @@ body {
   border-color: #ced4da;
 }
 
+.info-display {
+  height: 40px;
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  border: none;
+}
+
+.info-display:focus {
+  outline: 0;
+}
+
+.icon-arrow {
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
 #map {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 40px);
   width: 100vw;
 }
