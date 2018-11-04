@@ -1,6 +1,6 @@
 var view_toggle = true;
 
-if (!clientIsHost) {
+if (clientIsHost === false) {
     $("#name-prompt").show();
 }
 

@@ -4,6 +4,7 @@ var _ADDRESS = "";
 var _USR_LOC = "";
 var _COORDINATES = "";
 var markers = [];
+var user_markers = [];
 var marker_selected = false;
 
 /****CUSTOM MAP RELATED FUNCTIONS*****/
@@ -79,24 +80,37 @@ socket2.on('eta', function(data) {
     });
     $("#timer").text(timeToLeave);
     $("#user-list").text = "";
+    deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
         $("#user-list").text += data[key].name;
         $("#user-list").text += data[key].eta;
-        dropMarker(new google.maps.Marker({
+        var new_marker = new google.maps.Marker({
             map: map, 
             position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
-        })); //placeholfer
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10
+            },
+        });
+        user_markers.push(new_marker);
+        dropMarker(new_marker); //placeholfer
     });
 });
 
-let clientIsHost = true;
+var clientIsHost = true;
 
 socket2.on('userLocation', function(data) {
     Object.keys(data).forEach(function(key) {
-        dropMarker(new google.maps.Marker({
+        var new_marker = new google.maps.Marker({
             map: map, 
             position: {'lat': data[key].currentLocation.x, 'lng': data[key].currentLocation.y}, 
-        })); //placeholfer
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10
+            },
+        });
+        user_markers.push(new_marker);
+        dropMarker(new_marker); //placeholfer
     });
     clientIsHost = false;
 })
@@ -233,7 +247,7 @@ function init() {
             USR_LOC = pos;
             console.log(pos);
             // set user marker. 
-            var usr_marker = new google.maps.Marker({
+            user_markers.push(new google.maps.Marker({
                 position: pos,
                 map: map,
                 icon: {
@@ -241,7 +255,7 @@ function init() {
                     scale: 10
                   },
                 title: 'user location'
-            });
+            }));
         });
     }
 
