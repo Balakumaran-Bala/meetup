@@ -45,7 +45,6 @@ io.on('connection', function (socket) {
             eta: "-1", //estimated time of arrival
             ttl: "-1", //time to leave
         };
-        //socket.emit('joinedLobby');
     });
 
     socket.on('setDestination', function(data) {
@@ -57,7 +56,10 @@ io.on('connection', function (socket) {
     socket.on('updateLocation', function(data) {
         lobby.users[socket.id].currentLocation.x = data.x;
         lobby.users[socket.id].currentLocation.y = data.y;
-        //socket.emit('updatedLocation');
+        getDistanceInTime(socketId).then(res => {
+            lobby.users[socket.id].eta = res;
+            socket.emit('updatedLocation', {'users': lobby.users});
+        });
     });
 
     socket.on('departed', function() { //calculate everyones time to leave
