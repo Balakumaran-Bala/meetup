@@ -19,10 +19,16 @@ $("#mod-back").on('click', function() {
     $("#mode-prompt").hide();
 
 });
+
+let dist = null;
+
 $("#details-view").on('click', function() {
     if (view_toggle) {
+        if (!dist) {
+            dist = $("#details-view").height() - $(window).height() + document.getElementById("details-view").getBoundingClientRect().top;
+        }
         $(this).animate({
-            top: '-=20vh',
+            top: '-=' + dist + 'px',
         }), 500;
         // change text.
         $("#details-title").text("Time to leave: ");
@@ -33,7 +39,7 @@ $("#details-view").on('click', function() {
         view_toggle = !view_toggle;
     } else {
         $(this).animate({
-            top: '+=20vh',
+            top: '+=' + dist + 'px',
         }), 500;
         $("#details-title").text("More Info ");
         $(".fas").removeClass("fa-angle-down");
