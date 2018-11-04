@@ -38,38 +38,6 @@ body {
   box-shadow: 4px 5px 5px;
 }
 
-.info-display-btn {
-  align-items: center;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  box-shadow: none;
-  display: inline-flex;
-  font-size: 1rem;
-  height: 2.25em;
-  justify-content: flex-start;
-  line-height: 1.5;
-  padding-bottom: calc(.375em - 1px);
-  padding-left: calc(.625em - 1px);
-  padding-right: calc(.625em - 1px);
-  padding-top: calc(.375em - 1px);
-  position: relative;
-  vertical-align: top;
-
-  justify-content: center;
-  padding-bottom: calc(.375em - 1px);
-  padding-left: .75em;
-  padding-right: .75em;
-  padding-top: calc(.375em - 1px);
-  text-align: center;
-  white-space: nowrap;
-
-  position: absolute;
-  bottom: 40px;
-  text-align: left;
-  background-color: white;
-  border: none;
-}
-
 .shadow {
   box-shadow: 4px 5px 5px black;
 }
