@@ -77,15 +77,15 @@ var timeToLeave = 0;
 socket2.on('eta', function(data) {
     Object.keys(data).forEach(function(key) {
         if (data[key].name == "Keane" && timeToLeave == 0 && data[key].ttl != -1) {
-            timeToLeave = parseInt(data[key].ttl / 60) + ":" + (data[key].ttl % 60 >= 10 ? data[key].ttl % 60 : "0" + data[key].ttl % 60);
-            console.log(timeToLeave);
+            timeToLeave = data[key].ttl;
         }
     });
     $("#timer").text(timeToLeave);
+    $("#user-list").text = "";
     deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
-        
-
+        $("#user-list").text += data[key].name;
+        $("#user-list").text += data[key].eta;
         var new_marker = new google.maps.Marker({
             name: data[key].name,
             map: map, 
