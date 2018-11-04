@@ -3,50 +3,107 @@ body {
   margin: 0;
 }
 
+.ui-container {
+  text-align: center;
+}
+
+.center-container {
+  margin: 0 auto;
+  top: 0px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+}
+
 .search-container {
   z-index: 1;
   width: 100%;
   position: absolute;
-
+  top: 0px;
 }
 
 .map-search-input {
-  width: 80vw;
   max-width: 300px;
   margin: auto;
   margin-top: 2vh;
   display: block;
-  box-shadow: 0px 5px 5px;
 }
 
 .map-search-input:focus {
-  box-shadow: none;
-  border-color: #ced4da;
+  box-shadow: 4px 5px 5px;
 }
 
-.info-display {
+.info-display-btn {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.25em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding-bottom: calc(.375em - 1px);
+  padding-left: calc(.625em - 1px);
+  padding-right: calc(.625em - 1px);
+  padding-top: calc(.375em - 1px);
   position: relative;
-  height: 40px;
-  width: 100%;
+  vertical-align: top;
+
+  justify-content: center;
+  padding-bottom: calc(.375em - 1px);
+  padding-left: .75em;
+  padding-right: .75em;
+  padding-top: calc(.375em - 1px);
+  text-align: center;
+  white-space: nowrap;
+
+  position: absolute;
+  bottom: 40px;
   text-align: left;
   background-color: white;
   border: none;
-  box-shadow: 0 -1px 2px rgba(0,0,0,0.3);
 }
 
-.info-display:focus {
-  outline: 0;
+.shadow {
+  box-shadow: 4px 5px 5px black;
 }
 
-.icon-arrow {
-  height: 20px;
-  width: 20px;
-  margin-left: 10px;
-  margin-right: 5px;
+.next-btn {
+  color: black;
+  border-color: green;
+  background-color: greenyellow;
+  box-shadow: 4px 5px 2px green;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.spacer-top {
+  margin-top: 20px;
 }
 
 #map {
-  position: relative;
-  height: calc(100vh - 40px);
+  position: absolute !important;
+  height: 100vh;
   width: 100vw;
+  top: 0px;
+}
+
+#name-prompt {
+  z-index: 400;
+  margin-top: 75px;
+  border-radius: 4px;
+  width: 100%;
+  display: none;
+}
+
+#gandalf {
+  max-height: 200px;
 }
