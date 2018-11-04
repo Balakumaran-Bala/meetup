@@ -97,8 +97,11 @@ io.on('connection', function (socket) {
         lobby.users[socket.id].currentLocation.x = data.x;
         lobby.users[socket.id].currentLocation.y = data.y;
         getDistanceInTime(socket.id).then(res => {
-            lobby.users[socket.id].eta = res;
-            console.log(res, lobby.users[socket.id].name);
+            if (lobby.users[socket.id].eta > 0)
+                lobby.users[socket.id].eta -= lobby.users[socket.id].eta / 60.0;
+            else if (lobby.users[socket.id].eta == -1)
+                lobby.users[socket.id].eta = res;
+            console.log(lobby.users[socket.id].eta, lobby.users[socket.id].name);
         });
         io.emit('eta', lobby.users);
     });
