@@ -3,6 +3,11 @@ body {
   margin: 0;
 }
 
+.page-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
 .ui-container {
   text-align: center;
 }
@@ -10,7 +15,6 @@ body {
 .center-container {
   margin: 0 auto;
   top: 0px;
-  height: 100%;
   display: flex;
   justify-content: center;
   width: 80vw;
@@ -120,6 +124,10 @@ body {
 
 #mode-prompt {
   display: none;
+}
+
+#details-view {
+  top: calc(100vh - 210px);
 }
 
 #gandalf {

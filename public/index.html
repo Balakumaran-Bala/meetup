@@ -10,46 +10,46 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="ui-container">
-    <div id="map"></div>
-    <div class="center-container">
-      <div class="search-container">
-        <p class="control has-icons-right">
-          <input type="text" class="shadow input map-search-input" id="search-input" placeholder="Where to?">
-          <span class="icon is-small is-right">
-            <i style="color: black; margin-top: 30px;" class="fas fa-search"></i>
-          </span>
-        </p>
-      </div>
-      <button class="shadow info-display-btn">
-        Event Details
-      </button>
+  <div class="page-container">
+    <div class="ui-container">
+      <div id="map"></div>
+      <div class="center-container">
+        <div class="search-container">
+          <p class="control has-icons-right">
+            <input type="text" class="shadow input map-search-input" id="search-input" placeholder="Where to?">
+            <span class="icon is-small is-right">
+              <i style="color: black; margin-top: 30px;" class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+        <button class="shadow info-display-btn">
+          Event Details
+        </button>
 
 
-      <div id="name-prompt" class="shadow card prompt">
-        <div class="card-header">
-          <span class="card-header-title">Attend an event</span>
-        </div>
-        <div class="card-content">
-          <img id="gandalf" src="img/chibi__gandalf_by_ijen_ekusas-d5sqn6c.png" alt="Gandalf">
-          <p class="text-left">Hi, I'm Gandalf! Did you know that wizards are never late? Through this web app, I will bestow upon you this power!</p>
-          <div class="content spacer-top">
-            <p class="title is-4 text-left">Your name:</p>
-            <input type="text" class="input" placeholder="e.g. Frodo">
-            <p class="text-left spacer-top">This is the display name other members of your party will see.</p>
-            <div class="text-right">            
-              <button class="shadow button next-btn">Next</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="mode-prompt" class="shadow card prompt">
+        <div id="name-prompt" class="shadow card prompt">
           <div class="card-header">
             <span class="card-header-title">Attend an event</span>
           </div>
           <div class="card-content">
             <img id="gandalf" src="img/chibi__gandalf_by_ijen_ekusas-d5sqn6c.png" alt="Gandalf">
-            <p class="text-left">How are you getting there?</p>
+            <p class="text-left">Hi, I'm Gandalf! Did you know that wizards are never late? Through this web app, I will bestow upon you this power!</p>
+            <div class="content spacer-top">
+              <p class="title is-4 text-left">Your name:</p>
+              <input type="text" class="input" placeholder="e.g. Frodo">
+              <p class="text-left spacer-top">This is the display name other members of your party will see.</p>
+              <div class="text-right">            
+                <button class="shadow button next-btn">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mode-prompt" class="shadow card prompt">
+          <div class="card-header">
+            <span class="card-header-title">Attend an event</span>
+          </div>
+          <div class="card-content">
+            <img id="gandalf" src="img/partywizard.gif" alt="Gandalf">
             <div class="content spacer-top">
               <p class="title is-4 text-left">Mode of transportation:</p>
               <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
@@ -68,9 +68,16 @@
             </div>
           </div>
         </div>
+        <div id="details-view" class="shadow card prompt">
+          <div class="card-content">
+            <p>Time to leave:</p>
+            <h1 style="font-size: 4em" class="title">4:01</h1>
+            <div id="details-content" class="content spacer-top"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
   <script src="scripts/index.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv8qdJHCRpdVPEF9HxDd3mVG5qk2D1y7E&libraries=places&callback=init">
