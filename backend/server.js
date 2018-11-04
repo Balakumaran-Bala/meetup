@@ -6,6 +6,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var request = require('request');
 var qs = require('querystring');
+const readline = require('readline');
 
 var lobby = {
     destination: {
@@ -17,6 +18,15 @@ var lobby = {
 
 app.use(express.static(path.join(__dirname, '../public')));
 
+readline.emitKeypressEvents(process.stdin);
+process.stdin.setRawMode(true);
+process.stdin.on('keypress', (str, key) => {
+  if (key.ctrl && key.name === 'c') {
+    process.exit();
+  } else {
+    depart();
+  }
+});
 
 var getDistanceInTime = function(socketId) {
     return new Promise(function(resolve, reject) {
@@ -35,7 +45,25 @@ var getDistanceInTime = function(socketId) {
     });
 }
 
+var depart = function() {
+    var maxTime = 0;
+    Object.keys(lobby.users).forEach(function(socketId) {
+        getDistanceInTime(socketId).then(res => {
+            console.log(res);
+            if (res > maxTime) {
+                maxTime = res;
+            }
+            lobby.users[socketId].ttl = res;
+        });
+    });
+
+    Object.keys(lobby.users).forEach(function(socketId) {
+        lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
+    });
+}
+
 io.on('connection', function (socket) {
+
     socket.on('joinLobby', function(data) {
         lobby.users[socket.id] = {
             name: data.name,
@@ -50,33 +78,20 @@ io.on('connection', function (socket) {
     socket.on('setDestination', function(data) {
        lobby.destination.x = data.x;
        lobby.destination.y = data.y;
-       socket.emit('destinationSet');
+       //socket.emit('destinationSet');
     });
 
     socket.on('updateLocation', function(data) {
         lobby.users[socket.id].currentLocation.x = data.x;
         lobby.users[socket.id].currentLocation.y = data.y;
-        getDistanceInTime(socketId).then(res => {
-            lobby.users[socket.id].eta = res;
-            socket.emit('updatedLocation', {'users': lobby.users});
-        });
+        // getDistanceInTime(socket.id).then(res => {
+        //     lobby.users[socket.id].eta = res;
+        //     //socket.emit('updatedLocation', {'users': lobby.users});
+        // });
     });
 
     socket.on('departed', function() { //calculate everyones time to leave
-        var maxTime = 0;
-        Object.keys(lobby.users).forEach(function(socketId) {
-            getDistanceInTime(socketId).then(res => {
-                console.log(res);
-                if (res > maxTime) {
-                    maxTime = res;
-                }
-                lobby.users[socketId].ttl = res;
-            });
-
-            Object.keys(lobby.users).forEach(function(socketId) {
-                lobby.users[socketId].ttl = maxTime - lobby.users[socketId].ttl;
-            })
-        });
+        depart();
     });
 
     socket.on('disconnect', function(){
