@@ -1,7 +1,8 @@
 // globals.
+var NAME = "";
 var ADDRESS = "";
 var markers = [];
-
+var marker_selected = false;
 
 /****CUSTOM MAP RELATED FUNCTIONS*****/
 // deploys a marker object.
@@ -32,6 +33,8 @@ function clickToMarkers(_markers) {
                 map.panTo(event.latLng);
                 document.getElementById("search-input").value = _marker.address;
                 setMarkerData(_marker.address, _marker.title);
+                displayModal(NAME, ADDRESS);
+
             });
         }
     });
