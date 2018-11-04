@@ -92,6 +92,7 @@ body {
 
 #mode-prompt {
   display: none;
+  background-color: #746855;
 }
 
 #details-view {
