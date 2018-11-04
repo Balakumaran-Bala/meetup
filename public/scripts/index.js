@@ -97,7 +97,7 @@ function init() {
     // GENERATE MAP.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -25.344, lng: 131.036},
-        zoom: 5,
+        zoom: 13,
         disableDefaultUI: true,
         gestureHandling: 'greedy',
         clickableIcons: false,
