@@ -1,11 +1,11 @@
 // //House 3 approx 35 min away
 var socket3 = io.connect('http://localhost:8080');
 socket3.emit('joinLobby', {'name': 'Tony'});
-var tLoc = [29.5161656, -95.28864920000001];
+var tLoc = [29.530390, -95.347364];
 socket3.emit('updateLocation', {'x': tLoc[0], 'y': tLoc[1]}); // destination {'x': 29.7853358, 'y': -95.49261059999998}
-var destination = {'x': 29.7853358, 'y': -95.49261059999998};
-var xChange = (destination.x-tLoc[0])/60.0;
-var yChange = (destination.y+tLoc[1])/60.0;
+var destination = {'x': 29.728101, 'y': -95.338509};
+var xChange = (destination.x-tLoc[0])/20.0;
+var yChange = (destination.y-tLoc[1])/20.0;
 var moveTony = function() {
     console.log('move');
     socket3.emit('updateLocation', {'x': tLoc[0], 'y': tLoc[1]});
@@ -22,10 +22,10 @@ socket3.on('displayTTL', function(data) {
 
 var socket4 = io.connect('http://localhost:8080');            
 socket4.emit('joinLobby', {'name': 'Bala'});
-var bLoc = [29.6393083, -95.26521969999999];
-socket4.emit('updateLocation', {'x': bLoc[0], 'y': bloc[1]});
-var xChange2 = (destination.x-bLoc.x)/60;
-var yChange2 = (destination.y-bLoc.y)/60;
+var bLoc = [29.607590, -95.205608];
+socket4.emit('updateLocation', {'x': bLoc[0], 'y': bLoc[1]});
+var xChange2 = (destination.x-bLoc[0])/20.0;
+var yChange2 = (destination.y-bLoc[1])/20.0;
 var eta = 0;
 var notSet = true;
 var moveBala = function() {
