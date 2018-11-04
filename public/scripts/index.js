@@ -89,11 +89,17 @@ socket2.on('eta', function(data) {
     }
     var timeToLeave = parseInt(ttl / 60) + "m " + (ttl % 60 >= 10 ? ttl % 60 : "0" + ttl % 60) + "s";
     $("#timer").text(timeToLeave);
-    $("#user-list").text = "";
+    $("#user-list").text("");
     deleteMarkers(user_markers);
     Object.keys(data).forEach(function(key) {
-        $("#user-list").text += data[key].name;
-        $("#user-list").text += data[key].eta;
+        var floorEta = Math.floor(data[key].eta);
+        var etaString = parseInt(floorEta / 60) + "m " + (floorEta % 60 >= 10 ? floorEta % 60 : "0" + floorEta % 60) + "s";
+        
+        $("#user-list").html($("#user-list").html() + data[key].name);
+        $("#user-list").html($("#user-list").html() + " " + etaString + "<br>");
+        //document.getElementById("user-list").appendChild(document.createElement("BR"));
+
+        //$("#user-list-container").append("\n")
         var new_marker = new google.maps.Marker({
             name: data[key].name,
             map: map, 
