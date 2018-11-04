@@ -1,6 +1,7 @@
 // globals.
 var NAME = "";
 var ADDRESS = "";
+var USR_LOC = "";
 var markers = [];
 var marker_selected = false;
 
@@ -189,6 +190,7 @@ function init() {
     var input = document.getElementById('search-input');
     var searchBox = new google.maps.places.SearchBox(input);
 
+    // get user location.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -196,6 +198,7 @@ function init() {
                 lng: position.coords.longitude
             };
             map.setCenter(pos);
+            USR_LOC = pos;
             console.log(pos);
         });
     }
