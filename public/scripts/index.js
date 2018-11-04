@@ -96,7 +96,7 @@ socket2.emit('getUsers');
 function init() {
     // GENERATE MAP.
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -25.344, lng: 131.036},
+        center: {lat: 29.721865899999997, lng: -95.3404922},
         zoom: 13,
         disableDefaultUI: true,
         gestureHandling: 'greedy',
