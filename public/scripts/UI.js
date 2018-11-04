@@ -1,9 +1,14 @@
 var view_toggle = true;
 
 function DisplayHostModal(name, address) {
-    $("#mode-prompt").show();
-    $(".card-header-title").text("Going to "+name+", "+address);
+    $("#name-prompt").show();
 }
+
+$("#name-next").on('click', function() {
+    $("#name-prompt").hide();
+    $("#mode-prompt").show();
+})
+
 $("#mod-next").on('click', function() {
     $("#mode-prompt").hide();
     socket2.emit('setDisplayMarker');

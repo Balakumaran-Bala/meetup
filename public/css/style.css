@@ -92,7 +92,6 @@ body {
 
 #mode-prompt {
   display: none;
-  background-color: #746855;
 }
 
 #details-view {
@@ -105,7 +104,4 @@ body {
 }
 #details-time-title {
   margin: 10px;
-}
-#details-view {
-  border-radius: 10px;
 }

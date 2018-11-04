@@ -37,14 +37,14 @@
               <input type="text" class="input" placeholder="e.g. Frodo">
               <p class="text-left spacer-top">This is the display name other members of your party will see.</p>
               <div class="text-right">            
-                <button class="shadow button next-btn">Next</button>
+                <button id="name-next" class="shadow button next-btn">Next</button>
               </div>
             </div>
           </div>
         </div>
         <div id="mode-prompt" class="shadow card prompt">
           <div class="card-header">
-            <span class="card-header-title">aaa</span>
+            <span class="card-header-title">Attend an event</span>
           </div>
           <div class="card-content">
             <div id="address-line"></div>
@@ -56,7 +56,7 @@
                 <div class="name-input">
                 <input type="text" class="input" placeholder="Your name , eg. Frodo">
                 <div class="content spacer-top">
-                <p class="title is-4 text-left">Transportation:</p>
+                <p class="title is-4 text-left">Mode of transportation:</p>
                 <button style="height: 70px; width: 70px;" class="shadow-less-blur button">
                   <i class="fas fa-walking"></i>
                 </button>
@@ -105,9 +105,6 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv8qdJHCRpdVPEF9HxDd3mVG5qk2D1y7E&libraries=places&callback=init">
-  </script>
   <script src="/socket.io/socket.io.js"></script>
   <script> 
 
@@ -126,5 +123,8 @@
     <script src="scripts/bot.js"></script>
     <script src="scripts/index.js"></script>
     <script src="scripts/UI.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv8qdJHCRpdVPEF9HxDd3mVG5qk2D1y7E&libraries=places&callback=init">
+    </script>
 </body>
 </html>
